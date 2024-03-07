@@ -63,9 +63,16 @@ const getCourses = (req, res) => {
 };
 
 const getCourseData = (req, res) => {}
+
+const getCart = (req, res) => {
+    const cart = db.getCollection("cart");
+    const allCartItems = cart.find();
+    res.status(Response.SUCCESS).json(allCartItems);
+}
+
 const getUserFees = (req, res) => {}
 const getUserHistory = (req, res) => {}
-const getCart = (req, res) => {}
+
 
 const addToCart = (req, res) => {
     const cart = db.getCollection("cart") || db.addCollection("cart");
