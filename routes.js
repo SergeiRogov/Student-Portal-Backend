@@ -4,6 +4,10 @@ const {
     registerUser,
     loginUser,
     getCourses,
+    getCourseData,
+    getUserFees,
+    getUserHistory,
+    getCart,
     addToCart,
     checkout,
 } = require("./controllers");

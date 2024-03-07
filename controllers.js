@@ -34,6 +34,7 @@ const loginUser = (req, res) => {
     const user = users.findOne({ username });
 
     if (user) {
+        // Check if the password matches the hashed password stored in the database
         bcrypt.compare(password, user.password, (err, result) => {
             if (err) {
                 console.error("Error comparing passwords:", err);
@@ -42,12 +43,15 @@ const loginUser = (req, res) => {
             }
 
             if (result) {
+                // Login successful
                 res.status(Response.SUCCESS).send("Login successful"); // TODO: Generate proper response
             } else {
+                // Incorrect password
                 res.status(Response.NOT_AUTHORIZED).json(Response.unauthorized);
             }
         });
     } else {
+        // User not found
         res.status(unauthorizedResponse.status).send(unauthorizedResponse);
     }
 };
@@ -57,6 +61,11 @@ const getCourses = (req, res) => {
     const allCourses = courses.find();
     res.status(Response.SUCCESS).json(allCourses);
 };
+
+const getCourseData = (req, res) => {}
+const getUserFees = (req, res) => {}
+const getUserHistory = (req, res) => {}
+const getCart = (req, res) => {}
 
 const addToCart = (req, res) => {
     const cart = db.getCollection("cart") || db.addCollection("cart");
@@ -69,4 +78,4 @@ const checkout = (req, res) => {
     res.status(Response.SUCCESS).send("Payment processed successfully"); // TODO: Generate proper response
 };
 
-module.exports = { registerUser, loginUser, getCourses, addToCart, checkout };
+module.exports = { registerUser, loginUser, getCourses, getCourseData, getUserFees, getUserHistory, getCart, addToCart, checkout };
