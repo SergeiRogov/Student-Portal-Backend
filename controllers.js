@@ -1,3 +1,4 @@
+const bcrypt = require("bcrypt")
 const db = require("./db");
 const Response = require("./response");
 const saltRounds = 10;
@@ -30,10 +31,9 @@ const registerUser = (req, res) => {
 
 const loginUser = (req, res) => {
     const users = db.getCollection("users");
+    console.log(req.body);
     const { username, password } = req.body;
     const user = users.findOne({ username });
-
-    // res.status(Response.SUCCESS).send("Login successful");
 
     if (!user) {
         // User not found, return 401 (Unauthorized)
@@ -48,7 +48,7 @@ const loginUser = (req, res) => {
             res.status(Response.FAIL).json(Response.internalServerError);
             return;
         }
-
+        console.log(user.password, user.username)
         if (result) {
             // Login successful
             res.status(Response.SUCCESS).send("Login successful"); // TODO: Generate proper response
