@@ -23,7 +23,7 @@ router.get("/course/:id", getCourseData); // TODO: Implement Method (Gets course
 router.get("/user/fees", getUserFees); // TODO: get user fees for registered courses
 router.get("/user/history", getUserHistory); // TODO: get user history of courses
 
-router.get("/cart", getCart); // TODO: Implement Method (gets cart for current user)
+router.get("/cart", getCart);
 router.post("/cart", addToCart); // TODO: Fix Implemented Method (clear old cart and add new cart items per user)
 router.post("/checkout", checkout); // TODO: register user to all courses in checkout and clear cart
 

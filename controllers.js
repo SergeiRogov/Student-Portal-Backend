@@ -33,27 +33,31 @@ const loginUser = (req, res) => {
     const { username, password } = req.body;
     const user = users.findOne({ username });
 
-    if (user) {
-        // Check if the password matches the hashed password stored in the database
-        bcrypt.compare(password, user.password, (err, result) => {
-            if (err) {
-                console.error("Error comparing passwords:", err);
-                res.status(Response.FAIL).json(Response.internalServerError);
-                return;
-            }
+    // res.status(Response.SUCCESS).send("Login successful");
 
-            if (result) {
-                // Login successful
-                res.status(Response.SUCCESS).send("Login successful"); // TODO: Generate proper response
-            } else {
-                // Incorrect password
-                res.status(Response.NOT_AUTHORIZED).json(Response.unauthorized);
-            }
-        });
-    } else {
-        // User not found
-        res.status(unauthorizedResponse.status).send(unauthorizedResponse);
+    if (!user) {
+        // User not found, return 401 (Unauthorized)
+        res.status(Response.NOT_AUTHORIZED).json(Response.unauthorized);
+        return;
     }
+
+    // Check if the password matches the hashed password stored in the database
+    bcrypt.compare(password, user.password, (err, result) => {
+        if (err) {
+            console.error("Error comparing passwords:", err);
+            res.status(Response.FAIL).json(Response.internalServerError);
+            return;
+        }
+
+        if (result) {
+            // Login successful
+            res.status(Response.SUCCESS).send("Login successful"); // TODO: Generate proper response
+        } else {
+            // Incorrect password
+            res.status(Response.NOT_AUTHORIZED).json(Response.unauthorized);
+        }
+    });
+
 };
 
 const getCourses = (req, res) => {
