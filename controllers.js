@@ -60,6 +60,21 @@ const loginUser = (req, res) => {
 
 };
 
+const generateNewPassword = (req, res) => {
+    const users = db.getCollection("users");
+    console.log(req.body);
+    const { username } = req.body;
+    const user = users.findOne({ username });
+
+    if (!user) {
+        // User not found, return 401 (Unauthorized)
+        res.status(Response.NOT_AUTHORIZED).json(Response.unauthorized);
+        return;
+    }
+
+    // todo
+}
+
 const getCourses = (req, res) => {
     const courses = db.getCollection("courses");
     const allCourses = courses.find();
@@ -77,7 +92,6 @@ const getCart = (req, res) => {
 const getUserFees = (req, res) => {}
 const getUserHistory = (req, res) => {}
 
-
 const addToCart = (req, res) => {
     const cart = db.getCollection("cart") || db.addCollection("cart");
     cart.insert(req.body); // TODO: fix input received from body
@@ -89,4 +103,4 @@ const checkout = (req, res) => {
     res.status(Response.SUCCESS).send("Payment processed successfully"); // TODO: Generate proper response
 };
 
-module.exports = { registerUser, loginUser, getCourses, getCourseData, getUserFees, getUserHistory, getCart, addToCart, checkout };
+module.exports = { registerUser, loginUser, generateNewPassword, getCourses, getCourseData, getUserFees, getUserHistory, getCart, addToCart, checkout };

@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const {
     registerUser,
+    generateNewPassword,
     loginUser,
     getCourses,
     getCourseData,
@@ -14,11 +15,13 @@ const {
 
 // TODO: Add audit logging to all methods in controller.js
 
-router.post("/register", registerUser);
+router.post("/registration", registerUser);
 router.post("/login", loginUser);
 
+router.post("/generateNewPassword", generateNewPassword);
+
 router.get("/courses", getCourses);
-router.get("/course/:id", getCourseData); // TODO: Implement Method (Gets course Description, Cost per credit etc...)
+router.get("/courses/:id", getCourseData); // TODO: Implement Method (Gets course Description, Cost per credit etc...)
 
 router.get("/user/fees", getUserFees); // TODO: get user fees for registered courses
 router.get("/user/history", getUserHistory); // TODO: get user history of courses
