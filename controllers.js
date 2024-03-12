@@ -72,7 +72,29 @@ const generateNewPassword = (req, res) => {
         return;
     }
 
-    // todo
+    const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+';
+    let password = '';
+
+    // random length between 6 and 17
+    const passwordLength = Math.floor(Math.random() * (17 - 6 + 1)) + 10;
+
+    for (let i = 0; i < passwordLength; i++) {
+        const randomIndex = Math.floor(Math.random() * charset.length);
+        password += charset[randomIndex];
+    }
+
+    bcrypt.hash(password, 10, (err, hash) => {
+        if (err) {
+            console.error('Error hashing password:', err);
+            res.status(Response.INTERNAL_SERVER_ERROR).json(Response.internalServerError);
+            return;
+        }
+
+        user.password = hash;
+        users.update(user);
+
+        res.status(Response.SUCCESS).json({ generatedPassword: password });
+    });
 }
 
 const getCourses = (req, res) => {
