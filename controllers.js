@@ -5,7 +5,22 @@ const saltRounds = 10;
 
 const registerUser = (req, res) => {
     const users = db.getCollection("users") || db.addCollection("users");
-    const { username, password } = req.body; // TODO: fill in the input from the form
+    const { firstName,
+    surname,
+    gender,
+    email,
+    dateOfBirth,
+    nationality,
+    telephone,
+    cardNumber,
+    country,
+    region,
+    city,
+    street,
+    house,
+    flat,
+    username,
+    password } = req.body; 
 
     bcrypt.hash(password, saltRounds, (err, hashedPassword) => {
         if (err) {
@@ -15,8 +30,22 @@ const registerUser = (req, res) => {
         }
 
         const insertedUser = users.insert({
+            firstName,
+            surname,
+            gender,
+            email,
+            dateOfBirth,
+            nationality,
+            telephone,
+            cardNumber,
+            country,
+            region,
+            city,
+            street,
+            house,
+            flat,
             username,
-            password: hashedPassword,
+            password: hashedPassword,  
         }); // TODO: Save the registration form to db here
 
         const registerResponse = new Response(
