@@ -75,6 +75,26 @@
           "password": "$2b$10$goLZdm10F3haCy04X52c9uOzUrfIil55KjmO9lGGiW7hqe63chcfy",
           "meta": { "revision": 0, "created": 1710530852080, "version": 0 },
           "$loki": 2
+        },
+        {
+          "firstName": "Ivan",
+          "surname": "Ivanov",
+          "gender": "male",
+          "email": "ivan@gmail.com",
+          "dateOfBirth": "",
+          "nationality": "",
+          "telephone": "+7910111111",
+          "cardNumber": "",
+          "country": "Russia",
+          "region": "",
+          "city": "",
+          "street": "",
+          "house": "",
+          "flat": "",
+          "username": "ivan",
+          "password": "$2b$10$KMHjvR1Y9RWbAn7tfdWEde1v1SdfNzXmO1DmZF.g01AkbywQMS8o.",
+          "meta": { "revision": 0, "created": 1710531630811, "version": 0 },
+          "$loki": 3
         }
       ],
       "idIndex": null,
@@ -99,7 +119,7 @@
       "serializableIndices": true,
       "disableFreeze": true,
       "ttl": null,
-      "maxId": 2,
+      "maxId": 3,
       "DynamicViews": [],
       "events": {
         "insert": [],
