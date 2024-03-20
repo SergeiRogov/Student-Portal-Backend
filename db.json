@@ -47,12 +47,12 @@
       "data": [
         {
           "username": "ser",
-          "password": "$2b$10$8uDgSbEUO5cI6gfHfh2shOgp51MxlaweM2ZgngSSxFPEjcxlqb2D2",
+          "password": "$2b$10$xPEZdd5036R.rdzAk.GlEeqNwlYZdCteBU9672n..nw81YYH5Hk8.",
           "meta": {
-            "revision": 3,
+            "revision": 4,
             "created": 1709900141409,
             "version": 0,
-            "updated": 1710251273662
+            "updated": 1710926433129
           },
           "$loki": 1
         },
@@ -97,7 +97,7 @@
           "$loki": 3
         }
       ],
-      "idIndex": null,
+      "idIndex": [1, 2, 3],
       "binaryIndices": {},
       "constraints": null,
       "uniqueNames": [],
@@ -193,7 +193,7 @@
     "recursiveWait": true,
     "recursiveWaitLimit": false,
     "recursiveWaitLimitDuration": 2000,
-    "started": 1710530806666
+    "started": 1710926395223
   },
   "persistenceMethod": "fs",
   "persistenceAdapter": null,

@@ -46,7 +46,7 @@ const registerUser = (req, res) => {
             flat,
             username,
             password: hashedPassword,  
-        }); // TODO: Save the registration form to db here
+        }); 
 
         const registerResponse = new Response(
             200,
