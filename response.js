@@ -14,6 +14,10 @@ class Response {
         return new Response(this.FAIL, null, "Internal Server Error");
     }
 
+    static notFoundError(message) {
+        return new Response(this.NOT_FOUND, null, message);
+    }
+
     static failure(message) {
         return new Response(this.FAIL, null, message);
     }

@@ -49,12 +49,12 @@ const registerUser = (req, res) => {
         }); 
 
         const registerResponse = new Response(
-            200,
+            Response.SUCCESS,
             insertedUser,
             "User Registered Successfully"
         );
 
-        res.status(registerResponse.status).json(registerResponse);
+        res.status(Response.SUCCESS).json(registerResponse);
     });
 };
 
@@ -120,15 +120,15 @@ const generateNewPassword = (req, res) => {
 
         user.password = hash;
         users.update(user);
-
-        res.status(Response.SUCCESS).json({ generatedPassword: password });
+        const newPasswordResponse = new Response(Response.SUCCESS, { generatedPassword: password }, null);
+        res.status(Response.SUCCESS).json(newPasswordResponse);
     });
 }
 
 const getCourses = (req, res) => {
     const courses = db.getCollection("courses");
     if (!courses) {
-        res.status(Response.NOT_FOUND).json({ error: "Courses not found" });
+        res.status(Response.NOT_FOUND).json(Response.notFoundError("Courses not found"));
         return;
     }
 
@@ -148,7 +148,8 @@ const getCourseData = (req, res) => {}
 const getCart = (req, res) => {
     const cart = db.getCollection("cart");
     const allCartItems = cart.find();
-    res.status(Response.SUCCESS).json(allCartItems);
+    const allCartItemsResponse = new Response(Response.SUCCESS, allCartItems, null);
+    res.status(Response.SUCCESS).json(allCartItemsResponse);
 }
 
 const getUserFees = (req, res) => {}

@@ -162,12 +162,37 @@
           "house": "",
           "flat": "",
           "username": "sergeirogov",
-          "password": "$2b$10$oBqtbwUwlz3pZXHCrKeDr.h8ddR20TaCx6rhXN/MG6rvXBocbrSzu",
-          "meta": { "revision": 0, "created": 1710938034749, "version": 0 },
+          "password": "$2b$10$OURgvFTM99FCQffRJpgC3ePH9I0fR7GCoOrkW0v6wEanAcx/Nwepe",
+          "meta": {
+            "revision": 12,
+            "created": 1710938034749,
+            "version": 0,
+            "updated": 1711306472610
+          },
           "$loki": 1
+        },
+        {
+          "firstName": "Ivan",
+          "surname": "Ivanov",
+          "gender": "male",
+          "email": "we@3",
+          "dateOfBirth": "",
+          "nationality": "",
+          "telephone": "+7910222222",
+          "cardNumber": "",
+          "country": "Armenia",
+          "region": "",
+          "city": "",
+          "street": "",
+          "house": "",
+          "flat": "",
+          "username": "ivanivanov",
+          "password": "$2b$10$S66seaNl4Q4ZWIv.oOoB3uqoQjuWo4rLBm6UTfwcnLaxKT8a.ZBJi",
+          "meta": { "revision": 0, "created": 1711308398676, "version": 0 },
+          "$loki": 2
         }
       ],
-      "idIndex": null,
+      "idIndex": [1, 2],
       "binaryIndices": {},
       "constraints": null,
       "uniqueNames": [],
@@ -189,7 +214,7 @@
       "serializableIndices": true,
       "disableFreeze": true,
       "ttl": null,
-      "maxId": 1,
+      "maxId": 2,
       "DynamicViews": [],
       "events": {
         "insert": [],
@@ -263,7 +288,7 @@
     "recursiveWait": true,
     "recursiveWaitLimit": false,
     "recursiveWaitLimitDuration": 2000,
-    "started": 1710937945028
+    "started": 1711305969047
   },
   "persistenceMethod": "fs",
   "persistenceAdapter": null,
