@@ -3,7 +3,108 @@
   "collections": [
     {
       "name": "courses",
-      "data": [],
+      "data": [
+        {
+          "id": 1,
+          "title": "Introduction to React",
+          "description": "Learn the fundamentals of React.",
+          "lecturer": "Dr. Smith",
+          "details": "This course covers the basics of React development.",
+          "price": 100,
+          "meta": { "revision": 0, "created": 1710937209725, "version": 0 },
+          "$loki": 1
+        },
+        {
+          "id": 2,
+          "title": "Advanced JavaScript",
+          "description": "Master advanced JavaScript concepts.",
+          "lecturer": "Prof. Johnson",
+          "details": "This course dives deep into advanced JavaScript topics.",
+          "price": 250,
+          "meta": { "revision": 0, "created": 1710937209725, "version": 0 },
+          "$loki": 2
+        },
+        {
+          "id": 3,
+          "title": "Machine Learning",
+          "description": "ML course",
+          "lecturer": "Dr Parker",
+          "details": "The main objectives of the course are to:\n• Explain the basic concepts of data clustering and its applications.\n• Present the major algorithms of clustering.\n• Provide the characteristics of the basic types of clustering (hierarchical, partitioning, density)\n• Explain the principles and how association rules work.\n• Define the different types of anomaly detection methods.\n• Demonstrate a number of real-world applications about data clustering, association rulemining, and anomaly detection.\n• Demonstrate a set of tools that a practitioner can use in order to apply the algorithmspresented in the course.",
+          "price": 150,
+          "meta": { "revision": 0, "created": 1710937209725, "version": 0 },
+          "$loki": 3
+        },
+        {
+          "id": 4,
+          "title": "Machine Learning",
+          "description": "ML course",
+          "lecturer": "Dr Parker",
+          "details": "This course dives deep into advanced Machine Learning topics.",
+          "price": 100,
+          "meta": { "revision": 0, "created": 1710937209725, "version": 0 },
+          "$loki": 4
+        },
+        {
+          "id": 5,
+          "title": "Machine Learning",
+          "description": "ML course",
+          "lecturer": "Dr Parker",
+          "details": "Supervised Learning course",
+          "price": 350,
+          "meta": { "revision": 0, "created": 1710937209725, "version": 0 },
+          "$loki": 5
+        },
+        {
+          "id": 6,
+          "title": "Machine Learning",
+          "description": "ML course",
+          "lecturer": "Dr Parker",
+          "details": "Unsupervised Learning course",
+          "price": 50,
+          "meta": { "revision": 0, "created": 1710937209725, "version": 0 },
+          "$loki": 6
+        },
+        {
+          "id": 7,
+          "title": "Operating Systems",
+          "description": "Operating Systems course",
+          "lecturer": "Dr Parker",
+          "details": "",
+          "price": 200,
+          "meta": { "revision": 0, "created": 1710937209725, "version": 0 },
+          "$loki": 7
+        },
+        {
+          "id": 8,
+          "title": "Networks and Data Communication",
+          "description": "Networks and Data Communication course",
+          "lecturer": "Dr Parker",
+          "details": "",
+          "price": 150,
+          "meta": { "revision": 0, "created": 1710937209725, "version": 0 },
+          "$loki": 8
+        },
+        {
+          "id": 9,
+          "title": "Algorithms",
+          "description": "Algorithms course",
+          "lecturer": "Dr Parker",
+          "details": "",
+          "price": 150,
+          "meta": { "revision": 0, "created": 1710937209725, "version": 0 },
+          "$loki": 9
+        },
+        {
+          "id": 10,
+          "title": "Machine Learning",
+          "description": "ML course",
+          "lecturer": "Dr Parker",
+          "details": "",
+          "price": 150,
+          "meta": { "revision": 0, "created": 1710937209725, "version": 0 },
+          "$loki": 10
+        }
+      ],
       "idIndex": null,
       "binaryIndices": {},
       "constraints": null,
@@ -26,7 +127,7 @@
       "serializableIndices": true,
       "disableFreeze": true,
       "ttl": null,
-      "maxId": 0,
+      "maxId": 10,
       "DynamicViews": [],
       "events": {
         "insert": [],
@@ -46,24 +147,13 @@
       "name": "users",
       "data": [
         {
-          "username": "ser",
-          "password": "$2b$10$xPEZdd5036R.rdzAk.GlEeqNwlYZdCteBU9672n..nw81YYH5Hk8.",
-          "meta": {
-            "revision": 4,
-            "created": 1709900141409,
-            "version": 0,
-            "updated": 1710926433129
-          },
-          "$loki": 1
-        },
-        {
           "firstName": "Sergei",
           "surname": "Rogov",
           "gender": "male",
-          "email": "rogov120301@gmail.com",
+          "email": "nnll@lel",
           "dateOfBirth": "",
           "nationality": "",
-          "telephone": "+35795147245",
+          "telephone": "+7910111111",
           "cardNumber": "",
           "country": "Cyprus",
           "region": "",
@@ -72,32 +162,12 @@
           "house": "",
           "flat": "",
           "username": "sergeirogov",
-          "password": "$2b$10$goLZdm10F3haCy04X52c9uOzUrfIil55KjmO9lGGiW7hqe63chcfy",
-          "meta": { "revision": 0, "created": 1710530852080, "version": 0 },
-          "$loki": 2
-        },
-        {
-          "firstName": "Ivan",
-          "surname": "Ivanov",
-          "gender": "male",
-          "email": "ivan@gmail.com",
-          "dateOfBirth": "",
-          "nationality": "",
-          "telephone": "+7910111111",
-          "cardNumber": "",
-          "country": "Russia",
-          "region": "",
-          "city": "",
-          "street": "",
-          "house": "",
-          "flat": "",
-          "username": "ivan",
-          "password": "$2b$10$KMHjvR1Y9RWbAn7tfdWEde1v1SdfNzXmO1DmZF.g01AkbywQMS8o.",
-          "meta": { "revision": 0, "created": 1710531630811, "version": 0 },
-          "$loki": 3
+          "password": "$2b$10$oBqtbwUwlz3pZXHCrKeDr.h8ddR20TaCx6rhXN/MG6rvXBocbrSzu",
+          "meta": { "revision": 0, "created": 1710938034749, "version": 0 },
+          "$loki": 1
         }
       ],
-      "idIndex": [1, 2, 3],
+      "idIndex": null,
       "binaryIndices": {},
       "constraints": null,
       "uniqueNames": [],
@@ -119,7 +189,7 @@
       "serializableIndices": true,
       "disableFreeze": true,
       "ttl": null,
-      "maxId": 3,
+      "maxId": 1,
       "DynamicViews": [],
       "events": {
         "insert": [],
@@ -193,7 +263,7 @@
     "recursiveWait": true,
     "recursiveWaitLimit": false,
     "recursiveWaitLimitDuration": 2000,
-    "started": 1710926395223
+    "started": 1710937945028
   },
   "persistenceMethod": "fs",
   "persistenceAdapter": null,

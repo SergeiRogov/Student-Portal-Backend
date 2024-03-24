@@ -14,16 +14,24 @@ class Response {
         return new Response(this.FAIL, null, "Internal Server Error");
     }
 
+    static failure(message) {
+        return new Response(this.FAIL, null, message);
+    }
+
     static get SUCCESS() {
         return 200;
     }
 
-    static get FAIL() {
-        return 500;
-    }
-
     static get NOT_AUTHORIZED() {
         return 401;
+    }
+
+    static get NOT_FOUND() {
+        return 404;
+    }
+
+    static get FAIL() {
+        return 500;
     }
 }
 

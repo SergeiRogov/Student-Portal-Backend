@@ -86,7 +86,6 @@ const loginUser = (req, res) => {
             res.status(Response.NOT_AUTHORIZED).json(Response.unauthorized);
         }
     });
-
 };
 
 const generateNewPassword = (req, res) => {
@@ -115,7 +114,7 @@ const generateNewPassword = (req, res) => {
     bcrypt.hash(password, 10, (err, hash) => {
         if (err) {
             console.error('Error hashing password:', err);
-            res.status(Response.INTERNAL_SERVER_ERROR).json(Response.internalServerError);
+            res.status(Response.FAIL).json(Response.internalServerError);
             return;
         }
 
@@ -128,8 +127,20 @@ const generateNewPassword = (req, res) => {
 
 const getCourses = (req, res) => {
     const courses = db.getCollection("courses");
-    const allCourses = courses.find();
-    res.status(Response.SUCCESS).json(allCourses);
+    if (!courses) {
+        res.status(Response.NOT_FOUND).json({ error: "Courses not found" });
+        return;
+    }
+
+    try {
+        const allCourses = courses.find();
+        const allCoursesResponse = new Response(Response.SUCCESS, { courses: allCourses }, null);
+        res.status(Response.SUCCESS).json(allCoursesResponse);
+    } catch (error) {
+        console.error("Error fetching courses:", error);
+        
+        res.status(Response.FAIL).json(Response.failure("Failed to fetch courses"));
+    }
 };
 
 const getCourseData = (req, res) => {}
