@@ -147,19 +147,37 @@ const getCourseData = (req, res) => {}
 
 const getCart = (req, res) => {
     const cart = db.getCollection("cart");
-    const allCartItems = cart.find();
-    const allCartItemsResponse = new Response(Response.SUCCESS, allCartItems, null);
-    res.status(Response.SUCCESS).json(allCartItemsResponse);
+    if (!cart) {
+        res.status(Response.NOT_FOUND).json(Response.notFoundError("Cart is empty"));
+        return;
+    }
+
+    try {
+        const allCartItems = cart.find();
+        const allCartItemsResponse = new Response(Response.SUCCESS, allCartItems, null);
+        res.status(Response.SUCCESS).json(allCartItemsResponse);
+    } catch (error) {
+        console.error("Error fetching cart:", error);
+        res.status(Response.FAIL).json(Response.failure("Failed to fetch cart"));
+    }
 }
+
+const addToCart = (req, res) => {
+    try {
+        const cart = db.getCollection("cart") || db.addCollection("cart");
+        if (!req.body) {
+            throw new Error("Course data missing in request body");
+        }
+        cart.insert(req.body);
+        res.status(Response.SUCCESS).send("Course added to cart");
+    } catch (error) {
+        console.error("Error adding course to cart:", error.message);
+        res.status(Response.FAIL).send("Failed to add course to cart: " + error.message);
+    }
+};
 
 const getUserFees = (req, res) => {}
 const getUserHistory = (req, res) => {}
-
-const addToCart = (req, res) => {
-    const cart = db.getCollection("cart") || db.addCollection("cart");
-    cart.insert(req.body); // TODO: fix input received from body
-    res.status(Response.SUCCESS).send("Course added to cart");
-};
 
 const checkout = (req, res) => {
     // add credit card validation we can find on google
