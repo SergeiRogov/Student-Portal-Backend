@@ -192,7 +192,7 @@
           "$loki": 2
         }
       ],
-      "idIndex": [1, 2],
+      "idIndex": null,
       "binaryIndices": {},
       "constraints": null,
       "uniqueNames": [],
@@ -232,7 +232,78 @@
     },
     {
       "name": "cart",
-      "data": [],
+      "data": [
+        {
+          "id": 1,
+          "title": "Introduction to React",
+          "description": "Learn the fundamentals of React.",
+          "lecturer": "Dr. Smith",
+          "details": "This course covers the basics of React development.",
+          "price": 100,
+          "meta": { "revision": 0, "created": 1711375063419, "version": 0 },
+          "$loki": 1
+        },
+        {
+          "id": 2,
+          "title": "Advanced JavaScript",
+          "description": "Master advanced JavaScript concepts.",
+          "lecturer": "Prof. Johnson",
+          "details": "This course dives deep into advanced JavaScript topics.",
+          "price": 250,
+          "meta": { "revision": 0, "created": 1711375067312, "version": 0 },
+          "$loki": 2
+        },
+        {
+          "id": 4,
+          "title": "Machine Learning",
+          "description": "ML course",
+          "lecturer": "Dr Parker",
+          "details": "This course dives deep into advanced Machine Learning topics.",
+          "price": 100,
+          "meta": { "revision": 0, "created": 1711375177919, "version": 0 },
+          "$loki": 3
+        },
+        {
+          "id": 1,
+          "title": "Introduction to React",
+          "description": "Learn the fundamentals of React.",
+          "lecturer": "Dr. Smith",
+          "details": "This course covers the basics of React development.",
+          "price": 100,
+          "meta": { "revision": 0, "created": 1711375809424, "version": 0 },
+          "$loki": 4
+        },
+        {
+          "id": 2,
+          "title": "Advanced JavaScript",
+          "description": "Master advanced JavaScript concepts.",
+          "lecturer": "Prof. Johnson",
+          "details": "This course dives deep into advanced JavaScript topics.",
+          "price": 250,
+          "meta": { "revision": 0, "created": 1711375810172, "version": 0 },
+          "$loki": 5
+        },
+        {
+          "id": 1,
+          "title": "Introduction to React",
+          "description": "Learn the fundamentals of React.",
+          "lecturer": "Dr. Smith",
+          "details": "This course covers the basics of React development.",
+          "price": 100,
+          "meta": { "revision": 0, "created": 1711376912766, "version": 0 },
+          "$loki": 6
+        },
+        {
+          "id": 10,
+          "title": "Machine Learning",
+          "description": "ML course",
+          "lecturer": "Dr Parker",
+          "details": "",
+          "price": 150,
+          "meta": { "revision": 0, "created": 1711376934727, "version": 0 },
+          "$loki": 7
+        }
+      ],
       "idIndex": null,
       "binaryIndices": {},
       "constraints": null,
@@ -255,7 +326,7 @@
       "serializableIndices": true,
       "disableFreeze": true,
       "ttl": null,
-      "maxId": 0,
+      "maxId": 7,
       "DynamicViews": [],
       "events": {
         "insert": [],
@@ -288,7 +359,7 @@
     "recursiveWait": true,
     "recursiveWaitLimit": false,
     "recursiveWaitLimitDuration": 2000,
-    "started": 1711305969047
+    "started": 1711376907786
   },
   "persistenceMethod": "fs",
   "persistenceAdapter": null,

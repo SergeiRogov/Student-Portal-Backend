@@ -154,7 +154,7 @@ const getCart = (req, res) => {
 
     try {
         const allCartItems = cart.find();
-        const allCartItemsResponse = new Response(Response.SUCCESS, allCartItems, null);
+        const allCartItemsResponse = new Response(Response.SUCCESS, { cart: allCartItems }, null);
         res.status(Response.SUCCESS).json(allCartItemsResponse);
     } catch (error) {
         console.error("Error fetching cart:", error);
@@ -168,7 +168,20 @@ const addToCart = (req, res) => {
         if (!req.body) {
             throw new Error("Course data missing in request body");
         }
-        cart.insert(req.body);
+        const { id,
+            title,
+            description,
+            lecturer,
+            details,
+            price } = req.body; 
+
+        cart.insert({ id,
+            title,
+            description,
+            lecturer,
+            details,
+            price }); 
+
         res.status(Response.SUCCESS).send("Course added to cart");
     } catch (error) {
         console.error("Error adding course to cart:", error.message);
