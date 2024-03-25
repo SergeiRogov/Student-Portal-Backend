@@ -9,7 +9,9 @@ const {
     getUserFees,
     getUserHistory,
     getCart,
+    clearCart,
     addToCart,
+    removeFromCart,
     checkout,
 } = require("./controllers");
 
@@ -28,6 +30,9 @@ router.get("/user/history", getUserHistory); // TODO: get user history of course
 
 router.get("/cart", getCart);
 router.post("/cart", addToCart); // TODO: Fix Implemented Method (clear old cart and add new cart items per user)
+router.post("/clearCart", clearCart);
+router.post("/removeFromCart", removeFromCart);
+
 router.post("/checkout", checkout); // TODO: register user to all courses in checkout and clear cart
 
 module.exports = router;

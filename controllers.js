@@ -175,6 +175,11 @@ const addToCart = (req, res) => {
             details,
             price } = req.body; 
 
+        const existingCourse = cart.findOne({ id });
+        if (existingCourse) {
+            throw new Error("Course is already in the cart");
+        }
+
         cart.insert({ id,
             title,
             description,
@@ -189,6 +194,38 @@ const addToCart = (req, res) => {
     }
 };
 
+const clearCart = (req, res) => {
+    try {
+        const cart = db.getCollection("cart") || db.addCollection("cart");
+        cart.clear();
+        res.status(Response.SUCCESS).send("Cart is cleared");
+    } catch (error) {
+        console.error("Error clearing cart:", error.message);
+        res.status(Response.FAIL).send("Error clearing cart: " + error.message);
+    }
+};
+
+const removeFromCart = (req, res) => {
+    try {
+        if (!req.body) {
+            throw new Error("Course data missing in request body");
+        }
+        const cart = db.getCollection("cart");
+        const { courseIDToRemove } = req.body;
+        const removedCourse = cart.findOne(course => course.id === courseIDToRemove);
+    
+        if (removedCourse) {
+            cart.remove(removedCourse);
+            res.status(Response.SUCCESS).send("Course removed from cart");
+        } else {
+            res.status(Response.NOT_FOUND).send("Course not found in cart");
+        }
+    } catch (error) {
+        console.error("Error removing course to cart:", error.message);
+        res.status(Response.FAIL).send("Error removing course to cart: " + error.message);
+    }
+};
+
 const getUserFees = (req, res) => {}
 const getUserHistory = (req, res) => {}
 
@@ -197,4 +234,4 @@ const checkout = (req, res) => {
     res.status(Response.SUCCESS).send("Payment processed successfully"); // TODO: Generate proper response
 };
 
-module.exports = { registerUser, loginUser, generateNewPassword, getCourses, getCourseData, getUserFees, getUserHistory, getCart, addToCart, checkout };
+module.exports = { registerUser, loginUser, generateNewPassword, getCourses, getCourseData, getUserFees, getUserHistory, getCart, addToCart, clearCart, removeFromCart, checkout };

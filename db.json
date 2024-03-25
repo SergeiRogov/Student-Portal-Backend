@@ -234,44 +234,14 @@
       "name": "cart",
       "data": [
         {
-          "id": 1,
-          "title": "Introduction to React",
-          "description": "Learn the fundamentals of React.",
-          "lecturer": "Dr. Smith",
-          "details": "This course covers the basics of React development.",
-          "price": 100,
-          "meta": { "revision": 0, "created": 1711375063419, "version": 0 },
-          "$loki": 1
-        },
-        {
-          "id": 2,
-          "title": "Advanced JavaScript",
-          "description": "Master advanced JavaScript concepts.",
-          "lecturer": "Prof. Johnson",
-          "details": "This course dives deep into advanced JavaScript topics.",
-          "price": 250,
-          "meta": { "revision": 0, "created": 1711375067312, "version": 0 },
-          "$loki": 2
-        },
-        {
-          "id": 4,
+          "id": 6,
           "title": "Machine Learning",
           "description": "ML course",
           "lecturer": "Dr Parker",
-          "details": "This course dives deep into advanced Machine Learning topics.",
-          "price": 100,
-          "meta": { "revision": 0, "created": 1711375177919, "version": 0 },
-          "$loki": 3
-        },
-        {
-          "id": 1,
-          "title": "Introduction to React",
-          "description": "Learn the fundamentals of React.",
-          "lecturer": "Dr. Smith",
-          "details": "This course covers the basics of React development.",
-          "price": 100,
-          "meta": { "revision": 0, "created": 1711375809424, "version": 0 },
-          "$loki": 4
+          "details": "Unsupervised Learning course",
+          "price": 50,
+          "meta": { "revision": 0, "created": 1711395825703, "version": 0 },
+          "$loki": 33
         },
         {
           "id": 2,
@@ -280,31 +250,21 @@
           "lecturer": "Prof. Johnson",
           "details": "This course dives deep into advanced JavaScript topics.",
           "price": 250,
-          "meta": { "revision": 0, "created": 1711375810172, "version": 0 },
-          "$loki": 5
+          "meta": { "revision": 0, "created": 1711395826456, "version": 0 },
+          "$loki": 34
         },
         {
-          "id": 1,
-          "title": "Introduction to React",
-          "description": "Learn the fundamentals of React.",
-          "lecturer": "Dr. Smith",
-          "details": "This course covers the basics of React development.",
-          "price": 100,
-          "meta": { "revision": 0, "created": 1711376912766, "version": 0 },
-          "$loki": 6
-        },
-        {
-          "id": 10,
-          "title": "Machine Learning",
-          "description": "ML course",
+          "id": 7,
+          "title": "Operating Systems",
+          "description": "Operating Systems course",
           "lecturer": "Dr Parker",
           "details": "",
-          "price": 150,
-          "meta": { "revision": 0, "created": 1711376934727, "version": 0 },
-          "$loki": 7
+          "price": 200,
+          "meta": { "revision": 0, "created": 1711395827174, "version": 0 },
+          "$loki": 35
         }
       ],
-      "idIndex": null,
+      "idIndex": [33, 34, 35],
       "binaryIndices": {},
       "constraints": null,
       "uniqueNames": [],
@@ -326,7 +286,7 @@
       "serializableIndices": true,
       "disableFreeze": true,
       "ttl": null,
-      "maxId": 7,
+      "maxId": 35,
       "DynamicViews": [],
       "events": {
         "insert": [],
@@ -359,7 +319,7 @@
     "recursiveWait": true,
     "recursiveWaitLimit": false,
     "recursiveWaitLimitDuration": 2000,
-    "started": 1711376907786
+    "started": 1711395626760
   },
   "persistenceMethod": "fs",
   "persistenceAdapter": null,
