@@ -232,39 +232,8 @@
     },
     {
       "name": "cart",
-      "data": [
-        {
-          "id": 6,
-          "title": "Machine Learning",
-          "description": "ML course",
-          "lecturer": "Dr Parker",
-          "details": "Unsupervised Learning course",
-          "price": 50,
-          "meta": { "revision": 0, "created": 1711395825703, "version": 0 },
-          "$loki": 33
-        },
-        {
-          "id": 2,
-          "title": "Advanced JavaScript",
-          "description": "Master advanced JavaScript concepts.",
-          "lecturer": "Prof. Johnson",
-          "details": "This course dives deep into advanced JavaScript topics.",
-          "price": 250,
-          "meta": { "revision": 0, "created": 1711395826456, "version": 0 },
-          "$loki": 34
-        },
-        {
-          "id": 7,
-          "title": "Operating Systems",
-          "description": "Operating Systems course",
-          "lecturer": "Dr Parker",
-          "details": "",
-          "price": 200,
-          "meta": { "revision": 0, "created": 1711395827174, "version": 0 },
-          "$loki": 35
-        }
-      ],
-      "idIndex": [33, 34, 35],
+      "data": [],
+      "idIndex": [],
       "binaryIndices": {},
       "constraints": null,
       "uniqueNames": [],
@@ -286,7 +255,7 @@
       "serializableIndices": true,
       "disableFreeze": true,
       "ttl": null,
-      "maxId": 35,
+      "maxId": 1,
       "DynamicViews": [],
       "events": {
         "insert": [],
@@ -319,7 +288,7 @@
     "recursiveWait": true,
     "recursiveWaitLimit": false,
     "recursiveWaitLimitDuration": 2000,
-    "started": 1711395626760
+    "started": 1711405878029
   },
   "persistenceMethod": "fs",
   "persistenceAdapter": null,

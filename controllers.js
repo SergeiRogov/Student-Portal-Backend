@@ -147,7 +147,7 @@ const getCourseData = (req, res) => {}
 
 const getCart = (req, res) => {
     const cart = db.getCollection("cart");
-    if (!cart) {
+    if (!cart || cart.length === 0) {
         res.status(Response.NOT_FOUND).json(Response.notFoundError("Cart is empty"));
         return;
     }
@@ -177,7 +177,8 @@ const addToCart = (req, res) => {
 
         const existingCourse = cart.findOne({ id });
         if (existingCourse) {
-            throw new Error("Course is already in the cart");
+            res.status(Response.SUCCESS).send("Course is already in the cart");
+            return;
         }
 
         cart.insert({ id,
@@ -213,13 +214,11 @@ const removeFromCart = (req, res) => {
         const cart = db.getCollection("cart");
         const { courseIDToRemove } = req.body;
         const removedCourse = cart.findOne(course => course.id === courseIDToRemove);
-    
+        const message = removedCourse ?  "Course removed from cart" : "Course not found in cart";
         if (removedCourse) {
             cart.remove(removedCourse);
-            res.status(Response.SUCCESS).send("Course removed from cart");
-        } else {
-            res.status(Response.NOT_FOUND).send("Course not found in cart");
-        }
+        } 
+        res.status(Response.SUCCESS).send(message);
     } catch (error) {
         console.error("Error removing course to cart:", error.message);
         res.status(Response.FAIL).send("Error removing course to cart: " + error.message);
