@@ -26,6 +26,10 @@ class Response {
         return 200;
     }
 
+    static get NO_CONTENT() {
+        return 204;
+    }
+
     static get NOT_AUTHORIZED() {
         return 401;
     }

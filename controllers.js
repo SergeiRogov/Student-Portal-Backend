@@ -148,7 +148,7 @@ const getCourseData = (req, res) => {}
 const getCart = (req, res) => {
     const cart = db.getCollection("cart");
     if (!cart || cart.length === 0) {
-        res.status(Response.NOT_FOUND).json(Response.notFoundError("Cart is empty"));
+        res.status(Response.NO_CONTENT).send();
         return;
     }
 
