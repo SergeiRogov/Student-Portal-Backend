@@ -1,4 +1,5 @@
 const bcrypt = require("bcrypt")
+const uuid = require("uuid"); 
 const db = require("./db");
 const Response = require("./response");
 const saltRounds = 10;
@@ -29,7 +30,10 @@ const registerUser = (req, res) => {
             return;
         }
 
+        const userID = uuid.v4();
+
         const insertedUser = users.insert({
+            userID,
             firstName,
             surname,
             gender,
@@ -46,6 +50,7 @@ const registerUser = (req, res) => {
             flat,
             username,
             password: hashedPassword,  
+            cart: [],
         }); 
 
         const registerResponse = new Response(
@@ -65,7 +70,6 @@ const loginUser = (req, res) => {
     const user = users.findOne({ username });
 
     if (!user) {
-        // User not found, return 401 (Unauthorized)
         res.status(Response.NOT_AUTHORIZED).json(Response.unauthorized);
         return;
     }
@@ -79,10 +83,16 @@ const loginUser = (req, res) => {
         }
         console.log(user.password, user.username)
         if (result) {
-            // Login successful
-            res.status(Response.SUCCESS).send("Login successful"); // TODO: Generate proper response
+            const loginResponse = new Response(
+                Response.SUCCESS,
+                {
+                    userID: user.userID,
+                    username: user.username,
+                },
+                "User Logged In Successfully"
+            );
+            res.status(Response.SUCCESS).json(loginResponse);
         } else {
-            // Incorrect password
             res.status(Response.NOT_AUTHORIZED).json(Response.unauthorized);
         }
     });
@@ -128,7 +138,7 @@ const generateNewPassword = (req, res) => {
 const getCourses = (req, res) => {
     const courses = db.getCollection("courses");
     if (!courses) {
-        res.status(Response.NOT_FOUND).json(Response.notFoundError("Courses not found"));
+        res.status(Response.NO_CONTENT).send();
         return;
     }
 
@@ -146,16 +156,32 @@ const getCourses = (req, res) => {
 const getCourseData = (req, res) => {}
 
 const getCart = (req, res) => {
-    const cart = db.getCollection("cart");
-    if (!cart || cart.length === 0) {
-        res.status(Response.NO_CONTENT).send();
-        return;
-    }
 
     try {
-        const allCartItems = cart.find();
-        const allCartItemsResponse = new Response(Response.SUCCESS, { cart: allCartItems }, null);
+        const users = db.getCollection("users");
+        if (!users || users.length === 0) {
+            res.status(Response.NO_CONTENT).send();
+            return;
+        }
+
+        const { userID } = req.query;
+
+        const user = users.findOne({ userID: userID });
+        if (!user) {
+            res.status(Response.NO_CONTENT).send();
+            return;
+        }
+
+        const courses = db.getCollection("courses");
+
+        const cartItemIDs = user.cart;
+        const allUserCartItems = cartItemIDs.map(courseID => courses.findOne({ id: courseID }));
+
+        console.log(cartItemIDs)
+        console.log(allUserCartItems)
+        const allCartItemsResponse = new Response(Response.SUCCESS, { cartCourses: allUserCartItems }, null);
         res.status(Response.SUCCESS).json(allCartItemsResponse);
+        
     } catch (error) {
         console.error("Error fetching cart:", error);
         res.status(Response.FAIL).json(Response.failure("Failed to fetch cart"));
@@ -164,31 +190,31 @@ const getCart = (req, res) => {
 
 const addToCart = (req, res) => {
     try {
-        const cart = db.getCollection("cart") || db.addCollection("cart");
-        if (!req.body) {
-            throw new Error("Course data missing in request body");
+        const users = db.getCollection("users");
+        if (!users) {
+            res.status(Response.NO_CONTENT).send();
+            return;
         }
-        const { id,
-            title,
-            description,
-            lecturer,
-            details,
-            price } = req.body; 
 
-        const existingCourse = cart.findOne({ id });
-        if (existingCourse) {
+        const { userID, courseToAddID } = req.body;
+
+        const user = users.findOne({ userID: userID });
+        if (!user) {
+            res.status(Response.NO_CONTENT).send();
+            return;
+        }
+
+        if (user.cart.includes(courseToAddID)) {
             res.status(Response.SUCCESS).send("Course is already in the cart");
             return;
         }
 
-        cart.insert({ id,
-            title,
-            description,
-            lecturer,
-            details,
-            price }); 
+        user.cart.push(courseToAddID);
+
+        users.update(user);
 
         res.status(Response.SUCCESS).send("Course added to cart");
+
     } catch (error) {
         console.error("Error adding course to cart:", error.message);
         res.status(Response.FAIL).send("Failed to add course to cart: " + error.message);
@@ -197,8 +223,23 @@ const addToCart = (req, res) => {
 
 const clearCart = (req, res) => {
     try {
-        const cart = db.getCollection("cart") || db.addCollection("cart");
-        cart.clear();
+        const users = db.getCollection("users");
+        if (!users) {
+            res.status(Response.NO_CONTENT).send();
+            return;
+        }
+        const { userID } = req.body;
+        const user = users.findOne({ userID: userID });
+
+        if (!user) {
+            res.status(Response.NO_CONTENT).send();
+            return;
+        }
+
+        user.cart = [];
+
+        users.update(user);
+
         res.status(Response.SUCCESS).send("Cart is cleared");
     } catch (error) {
         console.error("Error clearing cart:", error.message);
@@ -211,14 +252,32 @@ const removeFromCart = (req, res) => {
         if (!req.body) {
             throw new Error("Course data missing in request body");
         }
-        const cart = db.getCollection("cart");
-        const { courseIDToRemove } = req.body;
-        const removedCourse = cart.findOne(course => course.id === courseIDToRemove);
-        const message = removedCourse ?  "Course removed from cart" : "Course not found in cart";
-        if (removedCourse) {
-            cart.remove(removedCourse);
-        } 
-        res.status(Response.SUCCESS).send(message);
+
+        const { userID, courseIDToRemove } = req.body;
+        const users = db.getCollection("users");
+
+        const user = users.findOne({ userID: userID });
+        if (!user) {
+            res.status(Response.NO_CONTENT).send();
+            return;
+        }
+
+        const cart = user.cart; 
+        if (!cart) {
+            res.status(Response.FAIL).send("User cart is undefined");
+            return;
+        }
+    
+        const removedCourseIndex = cart.indexOf(courseIDToRemove);
+        if (removedCourseIndex !== -1) {
+            cart.splice(removedCourseIndex, 1); 
+            user.cart = cart;
+            users.update(user);
+            res.status(Response.SUCCESS).send("Course removed from cart");
+        } else {
+            res.status(Response.SUCCESS).send("Course is not in cart");
+        }
+
     } catch (error) {
         console.error("Error removing course to cart:", error.message);
         res.status(Response.FAIL).send("Error removing course to cart: " + error.message);

@@ -2,7 +2,6 @@ const db = require("./db")
 
 db.addCollection("courses");
 db.addCollection("users");
-db.addCollection("cart");
 
 db.getCollection("users").insert({
     "firstName": "Sergei",
@@ -21,6 +20,7 @@ db.getCollection("users").insert({
     "flat": "",
     "username": "sergeirogov",
     "password": "$2b$10$oBqtbwUwlz3pZXHCrKeDr.h8ddR20TaCx6rhXN/MG6rvXBocbrSzu",
+    "cart": []
 });
 
 db.getCollection("courses").insert([

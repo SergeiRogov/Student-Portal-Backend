@@ -146,14 +146,43 @@
     {
       "name": "users",
       "data": [
+        { "$loki": 3 },
         {
+          "userID": "939ce6a2-b545-45ef-a072-eb16f9f91c98",
+          "firstName": "Ivan",
+          "surname": "Ivanov",
+          "gender": "male",
+          "email": "ivan@gmail.com",
+          "dateOfBirth": "",
+          "nationality": "",
+          "telephone": "+711111111111",
+          "cardNumber": "",
+          "country": "Armenia",
+          "region": "",
+          "city": "Erevan",
+          "street": "",
+          "house": "",
+          "flat": "",
+          "username": "Ivan",
+          "password": "$2b$10$azegFFW315lCzdUXzf0K5.LUld2zPh/g6y8X4i6sOiSqWdcU.PtYW",
+          "cart": [],
+          "meta": {
+            "revision": 4,
+            "created": 1712102410914,
+            "version": 0,
+            "updated": 1712102580714
+          },
+          "$loki": 4
+        },
+        {
+          "userID": "25329f19-be91-4940-8f80-d6b412a89b9a",
           "firstName": "Sergei",
           "surname": "Rogov",
           "gender": "male",
-          "email": "nnll@lel",
+          "email": "rogov120301@gmail.com",
           "dateOfBirth": "",
           "nationality": "",
-          "telephone": "+7910111111",
+          "telephone": "+35795147245",
           "cardNumber": "",
           "country": "Cyprus",
           "region": "",
@@ -162,37 +191,18 @@
           "house": "",
           "flat": "",
           "username": "sergeirogov",
-          "password": "$2b$10$OURgvFTM99FCQffRJpgC3ePH9I0fR7GCoOrkW0v6wEanAcx/Nwepe",
+          "password": "$2b$10$4.rsCyuBVNZBu0cIFRGu8uyHFJgQm/.OUY5DPQK3.zX/8vB53EIla",
+          "cart": [1, 2, 4, 10, 8],
           "meta": {
-            "revision": 12,
-            "created": 1710938034749,
+            "revision": 5,
+            "created": 1712102719288,
             "version": 0,
-            "updated": 1711306472610
+            "updated": 1712102832046
           },
-          "$loki": 1
-        },
-        {
-          "firstName": "Ivan",
-          "surname": "Ivanov",
-          "gender": "male",
-          "email": "we@3",
-          "dateOfBirth": "",
-          "nationality": "",
-          "telephone": "+7910222222",
-          "cardNumber": "",
-          "country": "Armenia",
-          "region": "",
-          "city": "",
-          "street": "",
-          "house": "",
-          "flat": "",
-          "username": "ivanivanov",
-          "password": "$2b$10$S66seaNl4Q4ZWIv.oOoB3uqoQjuWo4rLBm6UTfwcnLaxKT8a.ZBJi",
-          "meta": { "revision": 0, "created": 1711308398676, "version": 0 },
-          "$loki": 2
+          "$loki": 5
         }
       ],
-      "idIndex": null,
+      "idIndex": [3, 4, 5],
       "binaryIndices": {},
       "constraints": null,
       "uniqueNames": [],
@@ -214,7 +224,7 @@
       "serializableIndices": true,
       "disableFreeze": true,
       "ttl": null,
-      "maxId": 2,
+      "maxId": 5,
       "DynamicViews": [],
       "events": {
         "insert": [],
@@ -232,29 +242,8 @@
     },
     {
       "name": "cart",
-      "data": [
-        {
-          "id": 4,
-          "title": "Machine Learning",
-          "description": "ML course",
-          "lecturer": "Dr Parker",
-          "details": "This course dives deep into advanced Machine Learning topics.",
-          "price": 100,
-          "meta": { "revision": 0, "created": 1711541115213, "version": 0 },
-          "$loki": 12
-        },
-        {
-          "id": 3,
-          "title": "Machine Learning",
-          "description": "ML course",
-          "lecturer": "Dr Parker",
-          "details": "The main objectives of the course are to:\n• Explain the basic concepts of data clustering and its applications.\n• Present the major algorithms of clustering.\n• Provide the characteristics of the basic types of clustering (hierarchical, partitioning, density)\n• Explain the principles and how association rules work.\n• Define the different types of anomaly detection methods.\n• Demonstrate a number of real-world applications about data clustering, association rulemining, and anomaly detection.\n• Demonstrate a set of tools that a practitioner can use in order to apply the algorithmspresented in the course.",
-          "price": 150,
-          "meta": { "revision": 0, "created": 1711541116577, "version": 0 },
-          "$loki": 13
-        }
-      ],
-      "idIndex": [12, 13],
+      "data": [],
+      "idIndex": null,
       "binaryIndices": {},
       "constraints": null,
       "uniqueNames": [],
@@ -276,7 +265,7 @@
       "serializableIndices": true,
       "disableFreeze": true,
       "ttl": null,
-      "maxId": 13,
+      "maxId": 0,
       "DynamicViews": [],
       "events": {
         "insert": [],
@@ -309,7 +298,7 @@
     "recursiveWait": true,
     "recursiveWaitLimit": false,
     "recursiveWaitLimitDuration": 2000,
-    "started": 1711539709994
+    "started": 1712102518628
   },
   "persistenceMethod": "fs",
   "persistenceAdapter": null,
