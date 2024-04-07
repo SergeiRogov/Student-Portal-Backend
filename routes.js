@@ -12,7 +12,7 @@ const {
     clearCart,
     addToCart,
     removeFromCart,
-    checkout,
+    addToHistory,
 } = require("./controllers");
 
 // TODO: Add audit logging to all methods in controller.js
@@ -33,6 +33,7 @@ router.post("/cart", addToCart); // TODO: Fix Implemented Method (clear old cart
 router.post("/clearCart", clearCart);
 router.post("/removeFromCart", removeFromCart);
 
-router.post("/checkout", checkout); // TODO: register user to all courses in checkout and clear cart
+router.get("/history", getUserHistory); 
+router.post("/history", addToHistory); // TODO: register user to all courses in checkout and clear cart
 
 module.exports = router;

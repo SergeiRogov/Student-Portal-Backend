@@ -51,6 +51,7 @@ const registerUser = (req, res) => {
             username,
             password: hashedPassword,  
             cart: [],
+            history: [],
         }); 
 
         const registerResponse = new Response(
@@ -112,7 +113,7 @@ const generateNewPassword = (req, res) => {
 
     const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+';
     let password = '';
-
+    
     // random length between 6 and 17
     const passwordLength = Math.floor(Math.random() * (17 - 6 + 1)) + 10;
 
@@ -264,20 +265,14 @@ const removeFromCart = (req, res) => {
 
         const cart = user.cart; 
         if (!cart) {
-            res.status(Response.FAIL).send("User cart is undefined");
+            res.status(Response.FAIL).json(Response.failure("No cart"));
             return;
         }
-    
-        const removedCourseIndex = cart.indexOf(courseIDToRemove);
-        if (removedCourseIndex !== -1) {
-            cart.splice(removedCourseIndex, 1); 
-            user.cart = cart;
-            users.update(user);
-            res.status(Response.SUCCESS).send("Course removed from cart");
-        } else {
-            res.status(Response.SUCCESS).send("Course is not in cart");
-        }
-
+        
+        user.cart = cart.filter(courseID => courseID !== courseIDToRemove);
+        users.update(user);
+        res.status(Response.SUCCESS).send("Course removed from cart");
+     
     } catch (error) {
         console.error("Error removing course to cart:", error.message);
         res.status(Response.FAIL).send("Error removing course to cart: " + error.message);
@@ -285,11 +280,76 @@ const removeFromCart = (req, res) => {
 };
 
 const getUserFees = (req, res) => {}
-const getUserHistory = (req, res) => {}
 
-const checkout = (req, res) => {
-    // add credit card validation we can find on google
-    res.status(Response.SUCCESS).send("Payment processed successfully"); // TODO: Generate proper response
+const getUserHistory = async (req, res) => {
+
+    try {
+        const users = db.getCollection("users");
+        if (!users || users.length === 0) {
+            res.status(Response.NO_CONTENT).send();
+            return;
+        }
+
+        const { userID } = req.query;
+
+        const user = users.findOne({ userID: userID });
+        if (!user) {
+            res.status(Response.NO_CONTENT).send();
+            return;
+        }
+
+        const courses = db.getCollection("courses");
+        const historyItemIDs = user.history;
+    
+        const allUserHistoryItems = courses.find({ id: { $in: historyItemIDs } });
+
+        console.log(historyItemIDs)
+        console.log(allUserHistoryItems)
+        const allHistoryItemsResponse = new Response(Response.SUCCESS, { historyCourses: allUserHistoryItems }, null);
+        res.status(Response.SUCCESS).json(allHistoryItemsResponse);
+        
+    } catch (error) {
+        console.error("Error fetching history:", error);
+        res.status(Response.FAIL).json(Response.failure("Failed to fetch history"));
+    }
+}
+
+const addToHistory = (req, res) => {
+
+    try {
+        const users = db.getCollection("users");
+        if (!users) {
+            res.status(Response.NO_CONTENT).send();
+            return;
+        }
+
+        const { userID, coursesToBuyIDs } = req.body;
+
+        console.log(coursesToBuyIDs);
+
+        const user = users.findOne({ userID: userID });
+        if (!user) {
+            res.status(Response.NO_CONTENT).send();
+            return;
+        }
+
+        const newCourseIDs = coursesToBuyIDs.filter(
+            (courseID) => !user.history.includes(courseID)
+        );
+
+        user.history.push(...newCourseIDs);
+
+        user.cart = [];
+
+        users.update(user);
+
+        res.status(Response.SUCCESS).send("Payment processed successfully"); // TODO: Generate proper response
+
+    } catch (error) {
+        console.error("Error purchasing courses:", error.message);
+        res.status(Response.FAIL).send("Failed to add course to cart: " + error.message);
+    }
+    
 };
 
-module.exports = { registerUser, loginUser, generateNewPassword, getCourses, getCourseData, getUserFees, getUserHistory, getCart, addToCart, clearCart, removeFromCart, checkout };
+module.exports = { registerUser, loginUser, generateNewPassword, getCourses, getCourseData, getUserFees, getUserHistory, getCart, addToCart, clearCart, removeFromCart, getUserHistory, addToHistory };

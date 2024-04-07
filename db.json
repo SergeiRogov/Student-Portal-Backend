@@ -167,10 +167,10 @@
           "password": "$2b$10$azegFFW315lCzdUXzf0K5.LUld2zPh/g6y8X4i6sOiSqWdcU.PtYW",
           "cart": [],
           "meta": {
-            "revision": 4,
+            "revision": 14,
             "created": 1712102410914,
             "version": 0,
-            "updated": 1712102580714
+            "updated": 1712103468941
           },
           "$loki": 4
         },
@@ -192,17 +192,45 @@
           "flat": "",
           "username": "sergeirogov",
           "password": "$2b$10$4.rsCyuBVNZBu0cIFRGu8uyHFJgQm/.OUY5DPQK3.zX/8vB53EIla",
-          "cart": [1, 2, 4, 10, 8],
+          "cart": [1, 2],
           "meta": {
-            "revision": 5,
+            "revision": 48,
             "created": 1712102719288,
             "version": 0,
-            "updated": 1712102832046
+            "updated": 1712142498128
           },
           "$loki": 5
+        },
+        {
+          "userID": "13523116-905a-49fe-9897-54ef8a2d00ab",
+          "firstName": "Bob",
+          "surname": "Bob",
+          "gender": "male",
+          "email": "bob@gmail.com",
+          "dateOfBirth": "",
+          "nationality": "",
+          "telephone": "+111111",
+          "cardNumber": "",
+          "country": "Cyprus",
+          "region": "",
+          "city": "",
+          "street": "",
+          "house": "",
+          "flat": "",
+          "username": "bob",
+          "password": "$2b$10$pt.vvIJ.m5RX55PL2a.R1e0O59JPgpy8tYTmSPIL09AWs0n6Oi2X.",
+          "cart": [3],
+          "history": [2],
+          "meta": {
+            "revision": 61,
+            "created": 1712142903803,
+            "version": 0,
+            "updated": 1712507984105
+          },
+          "$loki": 6
         }
       ],
-      "idIndex": [3, 4, 5],
+      "idIndex": [3, 4, 5, 6],
       "binaryIndices": {},
       "constraints": null,
       "uniqueNames": [],
@@ -224,7 +252,7 @@
       "serializableIndices": true,
       "disableFreeze": true,
       "ttl": null,
-      "maxId": 5,
+      "maxId": 6,
       "DynamicViews": [],
       "events": {
         "insert": [],
@@ -298,7 +326,7 @@
     "recursiveWait": true,
     "recursiveWaitLimit": false,
     "recursiveWaitLimitDuration": 2000,
-    "started": 1712102518628
+    "started": 1712507951945
   },
   "persistenceMethod": "fs",
   "persistenceAdapter": null,
