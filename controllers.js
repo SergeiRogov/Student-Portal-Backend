@@ -114,8 +114,10 @@ const generateNewPassword = (req, res) => {
     const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+';
     let password = '';
     
-    // random length between 6 and 17
-    const passwordLength = Math.floor(Math.random() * (17 - 6 + 1)) + 10;
+    const minLen = 6;
+    const maxLen = 20;
+    // random length between minLen and maxLen
+    const passwordLength = Math.floor(Math.random() * (maxLen - minLen + 1)) + 10;
 
     for (let i = 0; i < passwordLength; i++) {
         const randomIndex = Math.floor(Math.random() * charset.length);

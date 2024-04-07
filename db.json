@@ -219,13 +219,13 @@
           "flat": "",
           "username": "bob",
           "password": "$2b$10$pt.vvIJ.m5RX55PL2a.R1e0O59JPgpy8tYTmSPIL09AWs0n6Oi2X.",
-          "cart": [3],
-          "history": [2],
+          "cart": [],
+          "history": [2, 3],
           "meta": {
-            "revision": 61,
+            "revision": 63,
             "created": 1712142903803,
             "version": 0,
-            "updated": 1712507984105
+            "updated": 1712508307441
           },
           "$loki": 6
         }
@@ -326,7 +326,7 @@
     "recursiveWait": true,
     "recursiveWaitLimit": false,
     "recursiveWaitLimitDuration": 2000,
-    "started": 1712507951945
+    "started": 1712508287711
   },
   "persistenceMethod": "fs",
   "persistenceAdapter": null,
