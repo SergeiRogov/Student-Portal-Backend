@@ -23,6 +23,13 @@ const registerUser = (req, res) => {
     username,
     password } = req.body; 
 
+    const existingUser = users.findOne({ username: username });
+
+    if (existingUser) {
+        res.status(Response.NOT_AUTHORIZED).json(Response.unauthorized);
+        return;
+    }
+
     bcrypt.hash(password, saltRounds, (err, hashedPassword) => {
         if (err) {
             console.error("Error hashing password:", err);
