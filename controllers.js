@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt")
 const uuid = require("uuid"); 
 const db = require("./db");
 const Response = require("./response");
+const jwt = require('jsonwebtoken');
 const saltRounds = 10;
 
 const registerUser = (req, res) => {
@@ -73,7 +74,6 @@ const registerUser = (req, res) => {
 
 const loginUser = (req, res) => {
     const users = db.getCollection("users");
-    console.log(req.body);
     const { username, password } = req.body;
     const user = users.findOne({ username });
 
@@ -89,13 +89,16 @@ const loginUser = (req, res) => {
             res.status(Response.FAIL).json(Response.internalServerError);
             return;
         }
-        console.log(user.password, user.username)
         if (result) {
+            const token = jwt.sign({ userID: user.userID }, '123456', {
+                expiresIn: '10s',
+                });
             const loginResponse = new Response(
                 Response.SUCCESS,
                 {
                     userID: user.userID,
                     username: user.username,
+                    token: token,
                 },
                 "User Logged In Successfully"
             );
@@ -108,7 +111,6 @@ const loginUser = (req, res) => {
 
 const generateNewPassword = (req, res) => {
     const users = db.getCollection("users");
-    console.log(req.body);
     const { username } = req.body;
     const user = users.findOne({ username });
 
@@ -187,8 +189,6 @@ const getCart = (req, res) => {
         const cartItemIDs = user.cart;
         const allUserCartItems = cartItemIDs.map(courseID => courses.findOne({ id: courseID }));
 
-        console.log(cartItemIDs)
-        console.log(allUserCartItems)
         const allCartItemsResponse = new Response(Response.SUCCESS, { cartCourses: allUserCartItems }, null);
         res.status(Response.SUCCESS).json(allCartItemsResponse);
         
@@ -312,8 +312,6 @@ const getUserHistory = async (req, res) => {
     
         const allUserHistoryItems = courses.find({ id: { $in: historyItemIDs } });
 
-        console.log(historyItemIDs)
-        console.log(allUserHistoryItems)
         const allHistoryItemsResponse = new Response(Response.SUCCESS, { historyCourses: allUserHistoryItems }, null);
         res.status(Response.SUCCESS).json(allHistoryItemsResponse);
         
@@ -333,8 +331,6 @@ const addToHistory = (req, res) => {
         }
 
         const { userID, coursesToBuyIDs } = req.body;
-
-        console.log(coursesToBuyIDs);
 
         const user = users.findOne({ userID: userID });
         if (!user) {
