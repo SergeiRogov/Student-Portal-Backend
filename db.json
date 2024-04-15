@@ -290,12 +290,12 @@
           "username": "sergeirogov",
           "password": "$2b$10$JDKg9iMngQPbKffqrS1xIOezCT8E5T/scShT5ehuzIAIPYdRE.dDe",
           "cart": [],
-          "history": [3, 2, 1, 4, 6, 5, 10, 7],
+          "history": [3, 2, 1, 4, 6, 5, 10, 7, 8],
           "meta": {
-            "revision": 32,
+            "revision": 35,
             "created": 1712741819678,
             "version": 0,
-            "updated": 1712749355648
+            "updated": 1713176286516
           },
           "$loki": 12
         },
@@ -419,7 +419,7 @@
     "recursiveWait": true,
     "recursiveWaitLimit": false,
     "recursiveWaitLimitDuration": 2000,
-    "started": 1712749441172
+    "started": 1713176265816
   },
   "persistenceMethod": "fs",
   "persistenceAdapter": null,

@@ -91,7 +91,7 @@ const loginUser = (req, res) => {
         }
         if (result) {
             const token = jwt.sign({ userID: user.userID }, '123456', {
-                expiresIn: '10s',
+                expiresIn: '1h',
                 });
             const loginResponse = new Response(
                 Response.SUCCESS,
